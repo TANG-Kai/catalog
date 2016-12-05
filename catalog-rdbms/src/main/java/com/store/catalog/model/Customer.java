@@ -72,8 +72,11 @@ public final class Customer implements AbstractBean {
         return password;
     }
 
-    public void setPassword(final String password) {
-        this.password = password;
+    public void setPassword(final String password) throws CheckException {
+    	if(password == null) throw new CheckException(INVALID_PASSWORD);
+    	else if(password == "") throw new CheckException(INVALID_PASSWORD);
+    	else if(password.equals(this.password)) throw new CheckException(INVALID_PASSWORD);
+    	else this.password = password;
     }
 
     public String getTelephone() {
