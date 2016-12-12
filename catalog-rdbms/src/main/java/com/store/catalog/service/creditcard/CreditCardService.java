@@ -10,5 +10,5 @@ import com.store.catalog.model.VerifCCResult;
 public interface CreditCardService {
 
 
-    VerifCCResult verifyCreditCard(final CreditCardDTO creditCardDto) throws CheckException;
+    VerifCCResult verifyCreditCard(final CreditCardDTO creditCardDto) throws Exception;
 }
