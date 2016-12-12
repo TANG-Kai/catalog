@@ -12,7 +12,17 @@ public class CreditCardServiceImpl implements CreditCardService {
 
 
     public VerifCCResult verifyCreditCard(final CreditCardDTO creditCardDto) throws CheckException {
+    	try { 
+            Integer.parseInt(creditCardDto.getCreditCardNumber()); 
+        } catch(NumberFormatException e) { 
+            throw new CheckException("number is not number");
+        } catch(NullPointerException e) {
+        	throw new CheckException("number is null");
+        }
+    	
+    	
         throw new RuntimeException("not yet implemented");
+        
     }
 
 }
