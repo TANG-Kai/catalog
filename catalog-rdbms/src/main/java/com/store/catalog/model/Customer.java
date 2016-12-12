@@ -110,6 +110,16 @@ public final class Customer implements AbstractBean {
     public void matchPassword(final String password1) throws CheckException {
         throw new RuntimeException("not yet implemented");
     }
+    
+    public boolean anotherMatchPassword(final String password1) throws CheckException {
+     	if( password1 == null || password1 == "")
+     	{
+     		throw new CheckException(INVALID_PASSWORD);
+     	}
+     	else {
+     		return this.password.equals(password1);
+     	}
+    }
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
