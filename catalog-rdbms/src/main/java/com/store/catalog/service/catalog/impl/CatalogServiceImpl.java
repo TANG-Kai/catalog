@@ -83,7 +83,18 @@ public class CatalogServiceImpl implements CatalogService {
 	// = Product Business methoods =
 	// ======================================
 	public ProductDTO createProduct(ProductDTO productDto) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (productDto == null)
+            throw new CheckException("Product object is null");
+        
+		logger.info("start");
+		Product product = dozerMapper.map(productDto, Product.class);
+		
+		productDao.save(product);
+		
+		ProductDTO productworkDto = dozerMapper.map(product, ProductDTO.class);
+		
+		logger.info("end");
+		return productworkDto;
 	}
 
 	@Transactional(readOnly=true)
@@ -123,28 +134,90 @@ public class CatalogServiceImpl implements CatalogService {
 	
 	@Transactional
 	public ItemDTO createItem(ItemDTO itemDto) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (itemDto == null)
+            throw new CheckException("Item object is null");
+        
+		logger.info("start");
+		Item item = dozerMapper.map(itemDto, Item.class);
+		
+		itemDao.save(item);
+		
+		ItemDTO itemworkDto = dozerMapper.map(item, ItemDTO.class);
+		
+		logger.info("end");
+		return itemworkDto;
 	}
 
 	@Transactional
 	public void updateItem(ItemDTO itemDto) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (itemDto == null)
+            throw new CheckException("Item object is null");
+        
+		if (itemDto.getId() == null)
+            throw new CheckException("Invalid id");
+
+
+		Item foundItem =  itemDao.findOne(itemDto.getId());
+
+		if(foundItem == null){
+			throw new CheckException("unkown id");
+		}
+
+		Item item = dozerMapper.map(itemDto, Item.class);
+		itemDao.save(item);
 	}
 
 
 	@Transactional
 	public void deleteItem(Long itemId) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (itemId == null || "".equals(itemId))
+            throw new CheckException("Invalid id");
+        
+		itemDao.delete(itemId);		
 	}
 
 	@Transactional(readOnly=true)
 	public List<ItemDTO> findItems() {
-		throw new RuntimeException("not yet implemented");
+        Iterable<Item> lst =  itemDao.findAll();
+
+		List<ItemDTO> lstDto = new ArrayList<ItemDTO>();
+
+		for (Item obj:lst){
+	        ItemDTO itemDto = dozerMapper.map(obj, ItemDTO.class);
+	        lstDto.add(itemDto);
+		}
+
+
+		return lstDto;
+		
+		/*
+	        Iterable<Category> lst =  categoryDao.findAll();
+	
+			List<CategoryDTO> lstDto = new ArrayList<CategoryDTO>();
+	
+			for (Category obj:lst){
+		        CategoryDTO categoryDto = dozerMapper.map(obj, CategoryDTO.class);
+		        lstDto.add(categoryDto);
+			}
+	
+	
+			return lstDto;
+		 */
 	}
 
 	@Transactional(readOnly=true)
 	public List<ItemDTO> findItems(Long productId) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+        Iterable<Item> lst =  itemDao.findByProductId(productId);
+
+		List<ItemDTO> lstDto = new ArrayList<ItemDTO>();
+
+		for (Item obj:lst){
+	        ItemDTO itemDto = dozerMapper.map(obj, ItemDTO.class);
+	        lstDto.add(itemDto);
+		}
+
+
+		return lstDto;
 	}
 
 	
@@ -157,7 +230,14 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Transactional(readOnly=true)
 	public ItemDTO findItem(Long itemId) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (itemId == null || "".equals(itemId))
+            throw new CheckException("Invalid id");
+
+
+        Item item = itemDao.findOne(itemId);
+		
+		ItemDTO itemDto = dozerMapper.map(item,ItemDTO.class);
+		return itemDto;
 	}
 
 	
