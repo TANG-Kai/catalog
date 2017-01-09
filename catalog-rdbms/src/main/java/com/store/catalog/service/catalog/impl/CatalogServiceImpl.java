@@ -6,7 +6,10 @@ import com.store.catalog.common.exception.CheckException;
 import com.store.catalog.dao.CategoryDao;
 import com.store.catalog.dao.ItemDao;
 import com.store.catalog.dao.ProductDao;
+
+import org.aspectj.lang.annotation.Before;
 import org.dozer.Mapper;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +40,9 @@ public class CatalogServiceImpl implements CatalogService {
 	
 
 	@Autowired
-	private Mapper dozerMapper;
+	private Mapper dozerMapper;// Un instance de dozerBeanMapper, une classe fournis par le frameworks Spring. Mapper est l'interface
 
-
-
+	
 	public Mapper getDozerMapper() {
 		return dozerMapper;
 	}

@@ -27,29 +27,32 @@ import static org.mockito.Mockito.when;
 public class CatalogServiceImplTest {
 
 
-	private CategoryDao categoryDaoMock;	
+	@Mock
+	private CategoryDao categoryDaoMock;
 	
 
-	private ProductDao productDaoMock;	
+	@Mock
+	private ProductDao productDaoMock;
 	
-
+	@Mock
 	private ItemDao itemDaoMock;
-
-
-    protected Mapper mockedMapper;
-
+	
+	@Mock
+	private Mapper mockedMapper;
+	
 	private CatalogServiceImpl catalogService;
 	
 
 	@Before
 	public void setUp() throws Exception {
+
+		catalogService = new CatalogServiceImpl();
 		
-		//init implementation CatalogServiceImpl
-
-		//set dependencies for Daos
-
-		//set dependency for dozer mapper
-
+		catalogService.setCategoryDao(categoryDaoMock);
+		catalogService.setProductDao(productDaoMock);
+		catalogService.setItemDao(itemDaoMock);
+		
+		catalogService.setDozerMapper(mockedMapper);
 		
 	}
 
