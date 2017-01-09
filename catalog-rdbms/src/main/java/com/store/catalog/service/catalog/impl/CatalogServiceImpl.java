@@ -17,21 +17,26 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@Transactional
 public class CatalogServiceImpl implements CatalogService {
 
 	Logger logger = LoggerFactory.getLogger(CatalogServiceImpl.class.getName());
 
 
-
+	@Autowired
 	private CategoryDao categoryDao ;
 	
 
+	@Autowired
 	protected ProductDao productDao ;
 	
 
+	@Autowired
 	private ItemDao itemDao ;
 	
 
+	@Autowired
 	private Mapper dozerMapper;
 
 
