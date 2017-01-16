@@ -37,7 +37,10 @@ public  class Category implements AbstractBean {
 	@Column(name = "description")
 	private String description;
 
-
+	
+	//FetchType.LAZY means that when selector is called, it won't automaticly fetch all the products that are of this category. 
+	//This operation will be done on-demand.
+	//while if we use FetchType.EAGER, we would fetch all products with the catogory at same time. which could be too expensive
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Product> products = new HashSet<Product>();
 

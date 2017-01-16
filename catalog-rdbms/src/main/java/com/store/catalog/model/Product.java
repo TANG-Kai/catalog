@@ -10,7 +10,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Entity
+@Table(name = "T_PRODUCT")
+@Access(AccessType.FIELD)
 public  class Product implements AbstractBean {
 
     /**
@@ -21,18 +23,31 @@ public  class Product implements AbstractBean {
 	// ======================================
     // =             Attributes             =
     // ======================================
+	@Id
+	@Column(name = "id")
     private Long id;
 
-
+	@Column(name = "name")
     private String name;
 
-
+	@Column(name = "description")
     private String description;
 
-
+	
+	//@JsonBackReference is used in pair with @JsonManagedReference to solve the Infinite recursion problem
+	//For avoiding the problem, linkage is handled such that the property annotated with @JsonManagedReference annotation is handled normally (serialized normally, no special handling for deserialization) and the property annotated with @JsonBackReference annotation is not serialized; and during deserialization, its value is set to instance that has the "managed" (forward) link.
+	//TODO: Test if this is still necessary(since there is no @JsonManagedReference in Category.java)
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "category_fk",
+			nullable = false)
     private Category category;
 
-
+	
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY,
+			mappedBy = "product",
+			cascade = CascadeType.ALL)
     private Set<Item> items = new HashSet<Item>();
     
  
