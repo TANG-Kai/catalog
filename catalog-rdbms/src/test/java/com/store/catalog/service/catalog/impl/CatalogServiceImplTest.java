@@ -353,11 +353,11 @@ public class CatalogServiceImplTest {
         Item item = getItem();
         Item item2 = getItem2();
 
-        ItemDTO itemDTO = getItemDto();
-        ItemDTO itemDTO2 = getItemDto();
-        
-        item.setProduct(getProduct());
-        item2.setProduct(getProduct2());
+        ItemDTO itemDTO = getItemDto(item);
+        ItemDTO itemDTO2 = getItemDto(item2);
+//        
+//        item.setProduct(getProduct());
+//        item2.setProduct(getProduct2());
 
         List<Item> returnedLst = new ArrayList<Item>();
 		
@@ -378,8 +378,13 @@ public class CatalogServiceImplTest {
         
         assertNotNull(returnedItemDTO1);
 //        assert(returnedItemDTO1.getId()!= item.getId());
-        assertEquals(returnedItemDTO1.getId(), item.getId());//why should this pass?
-        assertEquals(returnedItemDTO1.getId(), item2.getId());//why this doesn't work?
+        assert(returnedItemDTO1.getProduct().getId()== item2.getProduct().getId());
+        assert(returnedItemDTO1.getId()== itemDTO2.getId());
+        
+        
+//        assertEquals(returnedItemDTO1.getId(), item.getId());//why should this pass?
+//        assertEquals(returnedItemDTO1.getId(), item2.getId());//why this doesn't work?
+//        Answer:: They shouldn't even be compared with each other. what's returned is a DTO
 	}	
 	
 //TODO: WHAT IS THIS FOR?
