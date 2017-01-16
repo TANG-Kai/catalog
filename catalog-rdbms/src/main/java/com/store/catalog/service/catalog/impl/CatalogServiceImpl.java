@@ -99,7 +99,17 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Transactional(readOnly=true)
 	public List<ProductDTO> findProducts() {
-		throw new RuntimeException("not yet implemented");
+        Iterable<Product> lst =  productDao.findAll();
+
+		List<ProductDTO> lstDto = new ArrayList<ProductDTO>();
+
+		for (Product obj:lst){
+	        ProductDTO productDto = dozerMapper.map(obj, ProductDTO.class);
+	        lstDto.add(productDto);
+		}
+
+
+		return lstDto;
 	}
 
 	@Transactional(readOnly=true)
@@ -109,7 +119,14 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Transactional(readOnly=true)
 	public ProductDTO findProduct(Long productId) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (productId == null || "".equals(productId))
+            throw new CheckException("Invalid id");
+
+
+        Product product = productDao.findOne(productId);
+		
+		ProductDTO productDto = dozerMapper.map(product,ProductDTO.class);
+		return productDto;
 	}	
 	
 
@@ -120,12 +137,30 @@ public class CatalogServiceImpl implements CatalogService {
 	
 	@Transactional
 	public void updateProduct(ProductDTO productDto) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+		if (productDto == null)
+            throw new CheckException("Product object is null");
+        
+		if (productDto.getId() == null)
+            throw new CheckException("Invalid id");
+
+
+		Product foundProduct =  productDao.findOne(productDto.getId());
+
+		if(foundProduct == null){
+			throw new CheckException("unkown id");
+		}
+
+		Product product = dozerMapper.map(productDto, Product.class);
+		productDao.save(product);
 	}
 
 	@Transactional
 	public void deleteProduct(Long productId) throws CheckException {
-		throw new RuntimeException("not yet implemented");
+
+		if (productId == null || "".equals(productId))
+            throw new CheckException("Invalid id");
+        
+		productDao.delete(productId);		
 	}
 	
     // ======================================
