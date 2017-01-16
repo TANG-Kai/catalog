@@ -11,7 +11,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "T_ITEM")
+@Table(name="T_ITEM")
 @Access(AccessType.FIELD)
 public class Item implements AbstractBean {
 
@@ -23,22 +23,22 @@ public class Item implements AbstractBean {
     // =             Attributes             =
     // ======================================
 	@Id
-	@Column(name = "id")
+	@Column(name="id")
     private Long id;
 
-	@Column(name = "name")
+	@Column(name="name")
     private String name;
 
 
-	@Column(name = "unitCost")
+	@Column(name="unitCost")
     private double unitCost;
 
 
-	@Column(name = "imagePath")
+	@Column(name="imagePath")
     private String imagePath;
 
 	@ManyToOne
-	@Column(name = "product_fk", 
+	@Column(name="product_fk", 
 			nullable = false)
     private Product product;
 

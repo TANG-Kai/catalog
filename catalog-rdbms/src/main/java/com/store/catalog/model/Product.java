@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "T_PRODUCT")
+@Table(name="T_PRODUCT")
 @Access(AccessType.FIELD)
 public  class Product implements AbstractBean {
 
@@ -24,13 +24,13 @@ public  class Product implements AbstractBean {
     // =             Attributes             =
     // ======================================
 	@Id
-	@Column(name = "id")
+	@Column(name="id")
     private Long id;
 
-	@Column(name = "name")
+	@Column(name="name")
     private String name;
 
-	@Column(name = "description")
+	@Column(name="description")
     private String description;
 
 	
@@ -39,7 +39,7 @@ public  class Product implements AbstractBean {
 	//TODO: Test if this is still necessary(since there is no @JsonManagedReference in Category.java)
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "category_fk",
+	@JoinColumn(name="category_fk",
 			nullable = false)
     private Category category;
 

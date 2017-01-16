@@ -37,7 +37,8 @@ public class CategoryDaoTest  extends AbstractBaseDaoTestCase{
 
     @Test
     public void testCreateCategory() throws Exception {
-        throw new Exception("not yet implemented");
+    	categoryDao.save(category);
+    	assertTrue("promary key assigned", category.getId()!= null);
     }
 
     @Test

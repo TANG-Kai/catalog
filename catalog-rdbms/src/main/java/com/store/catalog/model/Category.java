@@ -14,7 +14,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "T_Category")
+@Table(name="T_CATEGORY")
 @Access(AccessType.FIELD)
 public  class Category implements AbstractBean {
 
@@ -28,13 +28,13 @@ public  class Category implements AbstractBean {
 
 
 	@Id
-	@Column(name = "id")
+	@Column(name="id")
 	private Long id;
     
-	@Column(name = "name")
+	@Column(name="name")
 	private String name;
 
-	@Column(name = "description")
+	@Column(name="description")
 	private String description;
 
 	
