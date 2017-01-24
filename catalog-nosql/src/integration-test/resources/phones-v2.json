@@ -1,5 +1,5 @@
 {"create" : {"_index":"catalog", "_type":"phone", "_id":"0995558dd12c1e021f79ef906a8fab5730b504e7"}}
-{ "age": 0, "imageUrl": "img/phones/motorola-xoom-with-wi-fi.0.jpg",    "name": "Motorola XOOM with Wi-Fi",    "snippet": "The Next, Next Generation Experience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb)."  }
+{ "age":0, "imageUrl": "img/phones/motorola-xoom-with-wi-fi.0.jpg","name": "Motorola XOOM with Wi-Fi","snippet": "The Next, Next Generation Experience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb)."  }
 {"create" : {"_index":"catalog", "_type":"phone", "_id":"afba15cd0e88b00084a2adf6324f4e155a189733"}}
 { "age": 1, "imageUrl": "img/phones/motorola-xoom.0.jpg",    "name": "MOTOROLA XOOM",    "snippet": "The Next, Next Generation Experience the future with MOTOROLA XOOM, the world's first tablet powered by Android 3.0 (Honeycomb)."  }
 {"create" : {"_index":"catalog", "_type":"phone", "_id":"9e384009a8dac38fa4d9de5d6bb677ffd1fdda36"}}
