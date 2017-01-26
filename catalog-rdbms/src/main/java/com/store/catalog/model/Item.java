@@ -38,7 +38,7 @@ public class Item implements AbstractBean {
     private String imagePath;
 
 	@ManyToOne
-	@Column(name="product_fk", 
+	@JoinColumn(name="product_fk", 
 			nullable = false)
     private Product product;
 
