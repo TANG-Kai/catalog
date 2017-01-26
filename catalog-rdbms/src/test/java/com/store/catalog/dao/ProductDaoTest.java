@@ -13,7 +13,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.store.catalog.model.Category;
+import com.store.catalog.model.Item;
 import com.store.catalog.model.Product;
+import com.store.catalog.utils.ConstantUtils;
 
 import static com.store.catalog.utils.ConstantUtils.*;
 
@@ -42,43 +44,159 @@ public class ProductDaoTest extends AbstractBaseDaoTestCase {
 
     @Test
     public void testCreateProduct() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	assertTrue("primary key assigned", product.getId()!= null);
     }    
    
     @Test
     public void testUpdateProduct() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	product.setName(ConstantUtils.PRODUCT_NAME+ "MDF");
+    	product.setDescription(ConstantUtils.PRODUCT_DESCRIPTION+ "MDF");
+    	productDao.save(product);    	
+    	
+    	Product catMdf = productDao.findOne(product.getId());
+    	
+    	assertNotNull(catMdf);
+    	assertEquals(product, catMdf);
     }    
     
     
     @Test
     public void testGetProduct() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	Product cat = productDao.findOne(product.getId());
+    	
+
+    	assertNotNull(cat);
+    	assertEquals(product, cat);
     }   
 
     
     @Test
     public void testRemoveProduct() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	Iterable<Product> lst = productDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Product cat2 = new Product();
+        cat2.setId(new Random().nextLong());
+        cat2.setCategory(getCategory2());
+    	cat2.setName(ConstantUtils.PRODUCT_NAME + "2");
+    	cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "2");
+    	
+    	
+    	productDao.save(cat2);
+    	
+    	lst = productDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 2);
+    	
+    	productDao.delete(product);
+    	
+    	lst = productDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+
+    	productDao.delete(cat2);
+    	
+    	lst = productDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 0);
     }
 
     
     
     @Test
     public void testGetProducts() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	Iterable<Product> lst = productDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Product cat2 = new Product();
+        cat2.setId(new Random().nextLong());
+        cat2.setCategory(getCategory2());
+    	cat2.setName(ConstantUtils.PRODUCT_NAME + "2");
+    	cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "2");
+    	
+    	
+    	productDao.save(cat2);
+    	
+    	lst = productDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 2);
     }    
     
 
     @Test
     public void testGetProductsWithCategoryId() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	Iterable<Product> lst = productDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Product cat2 = new Product();
+        cat2.setId(new Random().nextLong());
+        cat2.setCategory(getCategory2());
+    	cat2.setName(ConstantUtils.PRODUCT_NAME + "2");
+    	cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "2");
+    	Product cat3 = new Product();
+        cat3.setId(new Random().nextLong());
+        cat3.setCategory(getCategory2());
+    	cat3.setName(ConstantUtils.PRODUCT_NAME + "3");
+    	cat3.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "3");
+    	
+    	
+    	productDao.save(cat2);
+    	productDao.save(cat3);
+    	
+    	lst = productDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 3);
+    	
+    	lst = productDao.findByCategoryId(product.getCategory().getId());
+
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	//TODO: How to access the content of this list?
+    	
+    	
     }    
 
     
     @Test
     public void testGetProductsByCategoryName() throws Exception {
-        throw new Exception("not yet implemented");
+    	productDao.save(product);
+    	Iterable<Product> lst = productDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Product cat2 = new Product();
+        cat2.setId(new Random().nextLong());
+        cat2.setCategory(getCategory2());
+    	cat2.setName(ConstantUtils.PRODUCT_NAME + "2");
+    	cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "2");
+    	Product cat3 = new Product();
+        cat3.setId(new Random().nextLong());
+        cat3.setCategory(getCategory2());
+    	cat3.setName(ConstantUtils.PRODUCT_NAME + "3");
+    	cat3.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "3");
+    	
+    	
+    	productDao.save(cat2);
+    	productDao.save(cat3);
+
+    	
+    	lst = productDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 3);
+    	
+    	lst = productDao.findByCategoryName(product.getCategory().getName());
+
+    	assertTrue(getIterableSize(lst) == 1);
     }        
 	
 	

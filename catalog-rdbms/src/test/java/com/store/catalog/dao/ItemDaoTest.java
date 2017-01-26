@@ -1,6 +1,7 @@
 package com.store.catalog.dao;
 
 import com.store.catalog.model.Product;
+import com.store.catalog.utils.ConstantUtils;
 import com.store.catalog.model.Category;
 import com.store.catalog.model.Item;
 import org.junit.After;
@@ -45,42 +46,135 @@ public class ItemDaoTest extends AbstractBaseDaoTestCase {
 
     @Test
     public void testCreateItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	assertTrue("primary key assigned", item.getId()!= null);
     }
 
 
     @Test
     public void testUpdateItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	item.setName(ConstantUtils.ITEM_NAME+ "MDF");
+    	item.setUnitCost(ConstantUtils.ITEM_PRICE + 5.0);
+    	itemDao.save(item);    	
+    	
+    	Item catMdf = itemDao.findOne(item.getId());
+    	
+    	assertNotNull(catMdf);
+    	assertEquals(item, catMdf);
     }
 
     @Test
     public void testGetItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	Item cat = itemDao.findOne(item.getId());
+    	
+
+    	assertNotNull(cat);
+    	assertEquals(item, cat);
     }
 
 
     @Test
     public void testRemoveItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	Iterable<Item> lst = itemDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Item cat2 = getAnotherItem();
+    	
+    	
+    	itemDao.save(cat2);
+    	
+    	lst = itemDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 2);
+    	
+    	itemDao.delete(item);
+    	
+    	lst = itemDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+
+    	itemDao.delete(cat2);
+    	
+    	lst = itemDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 0);
     }
 
 
     @Test
     public void testGetItems() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	Iterable<Item> lst = itemDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Item cat2 = getAnotherItem();
+    	
+    	
+    	itemDao.save(cat2);
+    	
+    	lst = itemDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 2);
     }
 
 
     @Test
     public void testGetItemsWithProductId() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	Iterable<Item> lst = itemDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Item cat2 = this.getAnotherItem();
+    	
+    	Item cat3 =  this.getAnotherItem();
+    	
+    	
+    	itemDao.save(cat2);
+    	itemDao.save(cat3);
+    	
+    	lst = itemDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 3);
+    	
+    	lst = itemDao.findByProductId(item.getProduct().getId());
+
+    	assertTrue(getIterableSize(lst) == 1);
     }
 
 
     @Test
     public void testSearchItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	String key =  "_is_going_to_be_searched#####";
+    	item.setName(item.getName() + key);
+    	
+    	itemDao.save(item);
+    	Iterable<Item> lst = itemDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Item cat2 = this.getAnotherItem();
+    	cat2.setName(cat2.getName() + key);
+    	
+    	Item cat3 =  this.getAnotherItem();
+    	
+    	
+    	itemDao.save(cat2);
+    	itemDao.save(cat3);
+    	
+    	lst = itemDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 3);
+
+    	lst = itemDao.findByNameContaining(key);
+
+    	assertTrue(getIterableSize(lst) == 2);
     }
     
     
