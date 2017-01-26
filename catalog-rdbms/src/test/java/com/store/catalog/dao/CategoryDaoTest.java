@@ -38,28 +38,82 @@ public class CategoryDaoTest  extends AbstractBaseDaoTestCase{
     @Test
     public void testCreateCategory() throws Exception {
     	categoryDao.save(category);
-    	assertTrue("promary key assigned", category.getId()!= null);
+    	assertTrue("primary key assigned", category.getId()!= null);
     }
 
     @Test
     public void testUpdateCategory() throws Exception {
-        throw new Exception("not yet implemented");
+
+    	categoryDao.save(category);
+    	category.setName(ConstantUtils.CATEGOY_NAME+ "MDF");
+    	category.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "MDF");
+    	categoryDao.save(category);    	
+    	
+    	Category catMdf = categoryDao.findOne(category.getId());
+    	
+    	assertNotNull(catMdf);
+    	assertEquals(category, catMdf);
     }
 
     @Test
     public void testGetCategory() throws Exception {
-        throw new Exception("not yet implemented");
+    	categoryDao.save(category);
+    	Category cat = categoryDao.findOne(category.getId());
+    	
+    	assertNotNull(cat);
+    	assertEquals(category, cat);
     }
 
     @Test
     public void testRemoveCategory() throws Exception {
-        throw new Exception("not yet implemented");
+    	categoryDao.save(category);
+    	Iterable<Category> lst = categoryDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Category cat2 = new Category();
+        cat2.setId(new Random().nextLong());
+    	cat2.setName(ConstantUtils.CATEGOY_NAME + "2");
+    	cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "2");
+    	
+    	categoryDao.save(cat2);
+    	
+    	lst = categoryDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 2);
+    	
+    	categoryDao.delete(category);
+    	
+    	lst = categoryDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+
+    	categoryDao.delete(cat2);
+    	
+    	lst = categoryDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 0);
     }
 
 
     @Test
     public void testGetCategories() throws Exception {
-        throw new Exception("not yet implemented");
+    	categoryDao.save(category);
+    	Iterable<Category> lst = categoryDao.findAll();
+    	
+    	assertTrue(getIterableSize(lst) == 1);
+    	
+    	Category cat2 = new Category();
+        cat2.setId(new Random().nextLong());
+    	cat2.setName(ConstantUtils.CATEGOY_NAME + "2");
+    	cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "2");
+    	
+    	categoryDao.save(cat2);
+    	
+    	lst = categoryDao.findAll();
+
+    	assertTrue(getIterableSize(lst) == 2);
     }
 
     
