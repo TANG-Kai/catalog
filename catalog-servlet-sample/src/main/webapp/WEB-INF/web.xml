@@ -15,4 +15,16 @@
         <servlet-name>Ping</servlet-name>
         <url-pattern>/ping</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>MyFirstServlet</servlet-name>
+        <servlet-class>com.store.catalog.servlet.MyFirstServlet</servlet-class>
+
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyFirstServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
 </web-app>
