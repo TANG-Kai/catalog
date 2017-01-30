@@ -1,0 +1,37 @@
+--CATEGORIES
+curl -i http://localhost:10080/catalog/catalog/categories -H "Content-Type: application/json" -X GET
+
+curl -i http://localhost:10080/catalog/catalog/category -H "Content-Type: application/json" -X POST -d '{"id":20,"name":"Dinosorus","description":"prehistoric animals",  "products":null}'
+
+curl -i http://localhost:10080/catalog/catalog/category/20 -H "Content-Type: application/json" -X GET
+
+curl -i http://localhost:10080/catalog/catalog/category -H "Content-Type: application/json" -X PUT -d '{"id":20,"name":"Dinosorus","description":"prehistoric animals updated",
+  "products":null}'
+
+curl -i http://localhost:10080/catalog/catalog/category/20 -H "Content-Type: application/json" -X DELETE
+
+--ITEMS
+curl -i http://localhost:10080/catalog/catalog/items -H "Content-Type: application/json" -X GET
+
+curl -i http://localhost:10080/catalog/catalog/item -H "Content-Type: application/json" -X POST -d '{"id":20,"name":"Dinosorus","unitCost":50 }'
+
+curl -i http://localhost:10080/catalog/catalog/item/20 -H "Content-Type: application/json" -X GET
+
+curl -i http://localhost:10080/catalog/catalog/item -H "Content-Type: application/json" -X PUT -d '{"id":20,"name":"Dinosorus","unitCost": 80}'
+
+curl -i http://localhost:10080/catalog/catalog/item/20 -H "Content-Type: application/json" -X DELETE
+
+
+
+
+
+--PRODUCTS
+curl -i http://localhost:10080/catalog/catalog/products -H "Content-Type: application/json" -X GET
+
+curl -i http://localhost:10080/catalog/catalog/product -H "Content-Type: application/json" -X POST -d '{"id":20,"name":"Dinosorus","description":"prehistoric animals", "categoriy":null, }'
+
+curl -i http://localhost:10080/catalog/catalog/product/20 -H "Content-Type: application/json" -X GET
+
+curl -i http://localhost:10080/catalog/catalog/product -H "Content-Type: application/json" -X PUT -d '{"id":20,"name":"Dinosorus","description":"prehistoric animals updated"}'
+
+curl -i http://localhost:10080/catalog/catalog/product/20 -H "Content-Type: application/json" -X DELETE
