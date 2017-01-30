@@ -36,7 +36,7 @@ public class MyFirstServlet extends HttpServlet {
     				sum+= Double.parseDouble(num);
     		}
 
-			writer.println(((Double)sum).toString());
+			writer.println(sum);
     	}
     	else if(reqMethod.equalsIgnoreCase("GET")){//add using params
 
@@ -48,15 +48,9 @@ public class MyFirstServlet extends HttpServlet {
     		for( String[] strlst :  params.values()){
     			for(String str : strlst)
     				sum+= Double.parseDouble(str);
-    		}
-//    		String param1 = servletRequest.getParameter("param1");
-//    		String param2 = servletRequest.getParameter("param2");
-    		
-    		
-    		
-			writer.println(((Double)sum).toString());
-//    		writer.println(param1+param2);
-    		
+    		}		
+    		    		
+			writer.println(((Double)sum).toString());    		
     	}
     	else{
     		writer.println("wow what is this huh? should not have happened");
